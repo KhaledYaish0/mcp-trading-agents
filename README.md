@@ -1,95 +1,96 @@
-# MCP Trading Agents
 
-This project demonstrates an **Agentic AI trading system** using the **Model Context Protocol (MCP)**.  
-Instead of calling functions directly, the agents communicate with **MCP servers** that provide tools for:
-- Account management (balance, buy, sell, holdings)
-- Market price retrieval (Polygon API if available, fallback otherwise)
-- Push notifications (optional)
+# MCP Trading Agents Project
 
----
+This project demonstrates an agentic trading workflow powered by the **Model Context Protocol (MCP)**.
+The system consists of multiple servers that simulate a market environment, manage user accounts, and deliver real-time updates through push notifications.
 
-## 📌 Lab Structure
+The project includes **Lab 4** and **Lab 5**, where Lab 4 introduces the core MCP communication process, and Lab 5 extends the system with a more interactive UI and agent-driven decision logic.
 
-### **Lab 4 – Core System**
-Lab 4 builds the main system:
-- Defines the trading account model.
-- Connects to a market price source.
-- Exposes functionality through **MCP servers**.
-- Implements two agents:
-  - **Researcher Agent** → gathers market insights.
-  - **Trader Agent** → decides whether to buy or sell.
+## Features
 
+- MCP-enabled agent communication
+- Accounts server to handle balances and transactions
+- Market simulation server for buying, selling, and price updates
+- Push notification server for real-time updates
+- Memory storage to persist system state between runs
+- Lab 4 notebook for basic MCP testing
+- Lab 5 notebook for UI and agent workflows
 
----
-
-### **Lab 5 – Automated Loop + Reset**
-Lab 5 doesn’t add new trading logic.  
-Instead, it focuses on:
-- Running the trader repeatedly (looping cycles).
-- Resetting all trader accounts to clean starting states.
-
-
----
-
-## Main Files
+## Project Structure
 
 ```
-accounts.py           # Account model + buy/sell logic
-market.py             # Market price lookup (API or fallback)
-database.py           # Storage for logs, balances, and prices
-
-accounts_server.py    # MCP Server for trading actions
-market_server.py      # MCP Server for price retrieval
-push_server.py        # MCP Server for push notifications
-
-mcp_params.py         # Specifies which servers each agent connects to
-reset.py              # Resets trader accounts (Lab 5)
-4_lab4.ipynb          # Lab 4 notebook (manual trading demonstration)
-5_lab5.ipynb          # Lab 5 notebook (automated trading loop)
+MCP PROJECTT 2/
+│
+├─ 4_lab4.ipynb          → Intro lab for testing MCP interactions
+├─ 5_lab5.ipynb          → Enhanced lab with UI and agent logic
+│
+├─ app.py                → Main runtime script coordinating all components
+│
+├─ accounts.py           → Account data model and balance logic
+├─ accounts_client.py    → Client-side interface to the accounts server
+├─ accounts_server.py    → Server responsible for account/session operations
+│
+├─ market.py             → Market price and trading logic
+├─ market_server.py      → Server responsible for executing buy/sell requests
+│
+├─ push_server.py        → Real-time message broadcasting / notification server
+│
+├─ database.py           → System data persistence (balances, logs, state)
+│
+├─ mcp_params.py         → MCP configuration for tool exposure
+│
+├─ reset.py              → Resets state to default
+│
+└─ memory/
+   └─ memory.txt         → Persists stored state across runs
 ```
 
-Optional UI
+## How It Works
+
+The system follows a multi-server architecture:
 
 ```
-app.py                # Gradio dashboard to visualize traders
-traders.py            # Multi-trader logic
-trading_floor.py      # Automatic background trading loop (scheduler)
-templates.py / util.py / tracers.py # UI and logging helpers
+Client/Agent  ↔  Accounts Server   (balance + transactions)
+                  ↘
+                   ↘→ Market Server (buy/sell + price updates)
+                    ↘
+                     → Push Server (real-time notifications)
 ```
 
----
+Agents communicate using MCP, which allows LLMs to interact with the servers as tool calls.
 
-## Running the System
+## Running the Project
 
-### Start MCP Servers (3 terminals):
-```bash
-uv run accounts_server.py
-uv run market_server.py
-uv run push_server.py
+Start the servers in separate terminals:
+
+```
+python accounts_server.py
+python market_server.py
+python push_server.py
+python app.py
 ```
 
-### Lab 4:
-Open:
-```
-4_lab4.ipynb
-```
-Run cells in order.
+Then open:
 
-### Lab 5:
-```python
-from reset import reset_traders
-reset_traders()
+- `4_lab4.ipynb` to experiment with basic requests
+- `5_lab5.ipynb` for the enhanced agent/UI workflow
+
+## Reset System State
+
+If the system becomes inconsistent or you want to restart clean:
+
 ```
-Then run:
-```
-5_lab5.ipynb
+python reset.py
 ```
 
----
+## Requirements
 
-## UI Dashboard
-```bash
-uv run app.py
+Install dependencies:
+
+```
+pip install -r requirements.txt
 ```
 
-The UI is optional and available for visualization, not required for lab submission.
+## License
+
+This project is for educational and demonstration purposes.
