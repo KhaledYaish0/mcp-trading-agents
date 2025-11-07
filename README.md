@@ -1,35 +1,105 @@
-# MCP Trading Agents
+# MCP Trading Agents (Lab 4 + Lab 5)
 
-This project implements an **Agentic AI trading system** using the **Model Context Protocol (MCP)**.
-The system manages a trading account, retrieves market prices, and sends notifications. Agents such as
-Trader and Researcher interact with MCP servers rather than directly calling functions.
+This project demonstrates an **Agentic AI trading system** using the **Model Context Protocol (MCP)**.  
+Instead of calling functions directly, the agents communicate with **MCP servers** that provide tools for:
+- Account management (balance, buy, sell, holdings)
+- Market price retrieval (Polygon API if available, fallback otherwise)
+- Push notifications (optional)
 
-## Project Structure
+---
+
+## 📌 Lab Structure
+
+### **Lab 4 – Core System**
+Lab 4 builds the main system:
+- Defines the trading account model.
+- Connects to a market price source.
+- Exposes functionality through **MCP servers**.
+- Implements two agents:
+  - **Researcher Agent** → gathers market insights.
+  - **Trader Agent** → decides whether to buy or sell.
+
+> **Lab 4 = تشغيل النظام يدويًا وتجربة التداول.**
+
+---
+
+### **Lab 5 – Automated Loop + Reset**
+Lab 5 doesn’t add new trading logic.  
+Instead, it focuses on:
+- Running the trader repeatedly (looping cycles).
+- Resetting all trader accounts to clean starting states.
+
+> **Lab 5 = يخلي النظام يشتغل لوحده ويعيد نفسه بدون تدخل.**
+
+---
+
+## 📂 Main Files
 
 ```
-.accounts.py               # Core account & portfolio logic
-.market.py                 # Stock price retrieval (Polygon API or fallback)
-.accounts_server.py        # MCP server exposing trading & portfolio tools
-.market_server.py          # MCP server exposing price lookup
-.push_server.py            # MCP server sending push notifications
-.mcp_params.py             # Configures MCP server sets for each agent
-4_lab4.ipynb               # Notebook orchestrating agents
-memory/                    # Auto-generated memory DB files (ignored)
+accounts.py           # Account model + buy/sell logic
+market.py             # Market price lookup (API or fallback)
+database.py           # Storage for logs, balances, and prices
+
+accounts_server.py    # MCP Server for trading actions
+market_server.py      # MCP Server for price retrieval
+push_server.py        # MCP Server for push notifications
+
+mcp_params.py         # Specifies which servers each agent connects to
+reset.py              # Resets trader accounts (Lab 5)
+4_lab4.ipynb          # Lab 4 notebook (manual trading demonstration)
+5_lab5.ipynb          # Lab 5 notebook (automated trading loop)
 ```
 
-## Setup
+Optional UI (not required for labs):
 
-1. Copy `.env.example` to `.env` and fill in real API keys.
-2. Install dependencies using `uv` or standard setuptools.
-3. Start servers (in 3 terminals):
 ```
+app.py                # Gradio dashboard to visualize traders
+traders.py            # Multi-trader logic
+trading_floor.py      # Automatic background trading loop (scheduler)
+templates.py / util.py / tracers.py # UI and logging helpers
+```
+
+---
+
+## ▶️ Running the System
+
+### Start MCP Servers (3 terminals):
+```bash
 uv run accounts_server.py
 uv run market_server.py
 uv run push_server.py
 ```
-4. Open `4_lab4.ipynb` and run agent logic.
 
-## Notes
-- `.env` and `memory/` are ignored via `.gitignore`.
-- If Polygon API is available, real-time or daily market data is used.
-- Otherwise, the system falls back to generated random prices.
+### Lab 4:
+Open:
+```
+4_lab4.ipynb
+```
+Run cells in order.
+
+### Lab 5:
+```python
+from reset import reset_traders
+reset_traders()
+```
+Then run:
+```
+5_lab5.ipynb
+```
+
+---
+
+## (Optional) UI Dashboard
+```bash
+uv run app.py
+```
+
+---
+
+## ✅ Summary
+| Lab | الهدف |
+|---|---|
+| **Lab 4** | بناء النظام وتجربة التداول |
+| **Lab 5** | تشغيل متكرر + إعادة التهيئة |
+
+The UI is optional and available for visualization, not required for lab submission.
