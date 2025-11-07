@@ -1,0 +1,8 @@
+gradio
+pandas
+plotly
+openai
+python-dotenv
+pydantic
+requests
+polygon-api-client
