@@ -19,7 +19,6 @@ Lab 4 builds the main system:
   - **Researcher Agent** → gathers market insights.
   - **Trader Agent** → decides whether to buy or sell.
 
-> **Lab 4 = تشغيل النظام يدويًا وتجربة التداول.**
 
 ---
 
@@ -29,7 +28,6 @@ Instead, it focuses on:
 - Running the trader repeatedly (looping cycles).
 - Resetting all trader accounts to clean starting states.
 
-> **Lab 5 = يخلي النظام يشتغل لوحده ويعيد نفسه بدون تدخل.**
 
 ---
 
@@ -93,13 +91,5 @@ Then run:
 ```bash
 uv run app.py
 ```
-
----
-
-## ✅ Summary
-| Lab | الهدف |
-|---|---|
-| **Lab 4** | بناء النظام وتجربة التداول |
-| **Lab 5** | تشغيل متكرر + إعادة التهيئة |
 
 The UI is optional and available for visualization, not required for lab submission.
