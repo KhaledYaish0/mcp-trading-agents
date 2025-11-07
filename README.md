@@ -19,7 +19,7 @@ The project includes **Lab 4** and **Lab 5**, where Lab 4 introduces the core MC
 ## Project Structure
 
 ```
-MCP PROJECTT 2/
+MCP Project/
 │
 ├─ 4_lab4.ipynb          → Intro lab for testing MCP interactions
 ├─ 5_lab5.ipynb          → Enhanced lab with UI and agent logic
