@@ -75,6 +75,10 @@ Then open:
 - `4_lab4.ipynb` to experiment with basic requests
 - `5_lab5.ipynb` for the enhanced agent/UI workflow
 
+## Example
+
+<img width="1421" height="989" alt="image" src="https://github.com/user-attachments/assets/96dbbc96-3f46-4b92-89e2-f2a1b635c1c0" />
+
 ## Reset System State
 
 If the system becomes inconsistent or you want to restart clean:
