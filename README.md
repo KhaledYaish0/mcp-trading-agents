@@ -1,4 +1,4 @@
-# MCP Trading Agents (Lab 4 + Lab 5)
+# MCP Trading Agents
 
 This project demonstrates an **Agentic AI trading system** using the **Model Context Protocol (MCP)**.  
 Instead of calling functions directly, the agents communicate with **MCP servers** that provide tools for:
@@ -31,7 +31,7 @@ Instead, it focuses on:
 
 ---
 
-## 📂 Main Files
+## Main Files
 
 ```
 accounts.py           # Account model + buy/sell logic
@@ -48,7 +48,7 @@ reset.py              # Resets trader accounts (Lab 5)
 5_lab5.ipynb          # Lab 5 notebook (automated trading loop)
 ```
 
-Optional UI (not required for labs):
+Optional UI
 
 ```
 app.py                # Gradio dashboard to visualize traders
@@ -59,7 +59,7 @@ templates.py / util.py / tracers.py # UI and logging helpers
 
 ---
 
-## ▶️ Running the System
+## Running the System
 
 ### Start MCP Servers (3 terminals):
 ```bash
@@ -87,7 +87,7 @@ Then run:
 
 ---
 
-## (Optional) UI Dashboard
+## UI Dashboard
 ```bash
 uv run app.py
 ```
